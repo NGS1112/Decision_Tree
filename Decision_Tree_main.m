@@ -29,11 +29,14 @@ function Decision_Tree_main(filename)
     end
 
     %Attempts to create the trained program file, begins execution if successful
+    if ~exist('out', 'dir')
+       mkdir('out');
+    end
     answer = fopen('out/Decision_Tree_classifier.m', 'wt');
     if answer ~= -1
         %Initial header to print in the trained program
         fprintf(answer, 'function Decision_Tree_classifier(filename)\n');
-        fprintf(answer, "records = fopen('out/Classifications.csv', 'wt');\n");
+        fprintf(answer, "records = fopen('Classifications.csv', 'wt');\n");
         fprintf(answer, 'data = readmatrix(filename);\n');
         fprintf(answer, 'rows = size(data, 1);\n');
         fprintf(answer, 'for row = 1:rows\n');
